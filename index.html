@@ -648,6 +648,19 @@
       $('checkQuiz').addEventListener('click', () => { const answer=$('quizAnswer').value; $('quizResult').textContent = !answer ? 'Pilih salah satu jawaban terlebih dahulu.' : answer==='SUM' ? 'Benar! =SUM(A1:A3) menjumlahkan 5 + 10 + 15 sehingga hasilnya 30.' : 'Belum tepat. Coba ingat rumus yang digunakan untuk menjumlahkan beberapa angka.'; });
       updatePreview();
 
+
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const quizList = document.getElementById('quizList');
+      const quizForm = document.getElementById('understandingQuiz');
+      const testResult = document.getElementById('testResult');
+      const progress = document.getElementById('quizProgress');
+      const resetButton = document.getElementById('resetTest');
+      if (!quizList || !quizForm || !testResult || !progress || !resetButton) return;
+
       // Bank 25 soal; seluruh soal ditampilkan dalam urutan acak setiap kali dimuat.
       const questions = [
         {q:'Rumus apa yang digunakan untuk menjumlahkan angka di A1 sampai A5?',a:['=COUNT(A1:A5)','=SUM(A1:A5)','=MAX(A1:A5)','=MIN(A1:A5)'],c:1,e:'SUM menjumlahkan angka dalam rentang sel.'},
@@ -676,55 +689,85 @@
         {q:'Apa manfaat menyimpan dokumen Word sebagai PDF?',a:['Memudahkan berbagi dengan tampilan yang relatif konsisten','Mengubah semua teks menjadi rumus','Menghapus semua gambar','Membuat dokumen otomatis menjadi spreadsheet'],c:0,e:'PDF membantu menjaga tampilan dokumen saat dibagikan.'},
         {q:'Fitur Track Changes di Word digunakan untuk…',a:['Melacak perubahan saat dokumen diedit','Menjumlahkan sel','Membuat grafik lingkaran','Mengubah nama email'],c:0,e:'Track Changes mencatat perubahan untuk ditinjau.'}
       ];
-      const quizList = $('quizList'), quizForm = $('understandingQuiz'), testResult = $('testResult');
+
       function shuffle(array) {
         const copy = array.slice();
-        for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
         return copy;
       }
       function renderQuiz() {
         const randomized = shuffle(questions);
         quizList.replaceChildren();
         randomized.forEach((item, index) => {
-          const card = document.createElement('article'); card.className = 'quiz-question';
-          const heading = document.createElement('h3'); heading.textContent = `${index + 1}. ${item.q}`; card.appendChild(heading);
+          const card = document.createElement('article');
+          card.className = 'quiz-question';
+          const heading = document.createElement('h3');
+          heading.textContent = (index + 1) + '. ' + item.q;
+          card.appendChild(heading);
           const options = shuffle(item.a.map((label, originalIndex) => ({label, originalIndex})));
           options.forEach(option => {
-            const label = document.createElement('label'); label.className = 'quiz-option';
-            const radio = document.createElement('input'); radio.type = 'radio'; radio.name = `question-${index}`; radio.value = String(option.originalIndex); radio.required = true;
-            const span = document.createElement('span'); span.textContent = option.label;
-            label.append(radio, span); card.appendChild(label);
+            const label = document.createElement('label');
+            label.className = 'quiz-option';
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'question-' + index;
+            radio.value = String(option.originalIndex);
+            radio.required = true;
+            const span = document.createElement('span');
+            span.textContent = option.label.trim();
+            label.append(radio, span);
+            card.appendChild(label);
           });
-          card.dataset.correct = String(item.c); card.dataset.explanation = item.e; quizList.appendChild(card);
+          card.dataset.correct = String(item.c);
+          card.dataset.explanation = item.e;
+          quizList.appendChild(card);
         });
-        $('quizProgress').textContent = '25 soal • Urutan diacak';
-        testResult.style.display = 'none'; testResult.textContent = '';
+        progress.textContent = '25 soal • Urutan diacak';
+        testResult.style.display = 'none';
+        testResult.textContent = '';
       }
       quizForm.addEventListener('submit', event => {
         event.preventDefault();
         const cards = [...quizList.querySelectorAll('.quiz-question')];
-        const unanswered = cards.findIndex((card, i) => !quizForm.querySelector(`input[name="question-${i}"]:checked`));
-        if (unanswered !== -1) { $('quizProgress').textContent = `Masih ada soal yang belum dijawab (soal ${unanswered + 1}).`; cards[unanswered].scrollIntoView({behavior:'smooth',block:'center'}); return; }
-        let score = 0; const review = [];
+        const unanswered = cards.findIndex((card, i) => !quizForm.querySelector('input[name="question-' + i + '"]:checked'));
+        if (unanswered !== -1) {
+          progress.textContent = 'Masih ada soal yang belum dijawab (soal ' + (unanswered + 1) + ').';
+          cards[unanswered].scrollIntoView({behavior:'smooth', block:'center'});
+          return;
+        }
+        let score = 0;
+        const review = [];
         cards.forEach((card, i) => {
-          const selected = Number(quizForm.querySelector(`input[name="question-${i}"]:checked`).value);
-          const correct = Number(card.dataset.correct); if (selected === correct) score++;
-          const answerText = card.querySelectorAll('.quiz-option span')[0];
-          review.push(`${i + 1}. ${selected === correct ? 'Benar' : 'Belum tepat'} — ${card.dataset.explanation}`);
+          const selected = Number(quizForm.querySelector('input[name="question-' + i + '"]:checked').value);
+          const correct = Number(card.dataset.correct);
+          if (selected === correct) score++;
+          review.push((i + 1) + '. ' + (selected === correct ? 'Benar' : 'Belum tepat') + ' — ' + card.dataset.explanation);
         });
         const percent = Math.round(score / cards.length * 100);
         testResult.style.display = 'block';
-        testResult.textContent = `Nilai kamu: ${score}/25 (${percent}%).
-${percent >= 88 ? 'Mantap! Pemahamanmu sudah sangat baik.' : percent >= 68 ? 'Bagus! Pelajari lagi materi yang masih keliru.' : 'Jangan menyerah. Baca materi lagi lalu coba ulangi tes.'}
-
-Pembahasan:
-${review.join('\n')}`;
-        $('quizProgress').textContent = 'Tes selesai'; testResult.scrollIntoView({behavior:'smooth',block:'start'});
+        testResult.textContent = 'Nilai kamu: ' + score + '/25 (' + percent + '%).\n' +
+          (percent >= 88 ? 'Mantap! Pemahamanmu sudah sangat baik.' : percent >= 68 ? 'Bagus! Pelajari lagi materi yang masih keliru.' : 'Jangan menyerah. Baca materi lagi lalu coba ulangi tes.') +
+          '\n\nPembahasan:\n' + review.join('\n');
+        progress.textContent = 'Tes selesai';
+        testResult.scrollIntoView({behavior:'smooth', block:'start'});
       });
-      $('resetTest').addEventListener('click', renderQuiz);
+      resetButton.addEventListener('click', renderQuiz);
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (link.getAttribute('href') === '#tes-pemahaman') {
+            renderQuiz();
+          } else {
+            renderQuiz();
+          }
+        });
+      });
       renderQuiz();
     })();
   </script>
+
 
   <!-- ===== KONTAK ===== -->
   <section class="contact-section" id="kontak">
