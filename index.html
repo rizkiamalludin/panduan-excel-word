@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panduan Excel &amp; Word — Rumus, Fungsi, dan Shortcut</title>
+  <meta name="description" content="Panduan lengkap Microsoft Excel dan Word dalam bahasa Indonesia: rumus seperti SUM, fungsi, kegunaan fitur, dan shortcut seperti Ctrl+A." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#beranda" class="brand">
+        <span class="brand-mark" aria-hidden="true">ƒx</span>
+        <span class="brand-text">
+          <strong>Excel &amp; Word Guide</strong>
+          <small>Rumus · Fungsi · Shortcut</small>
+        </span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#rumus-excel">Rumus Excel</a>
+        <a href="#fitur-excel">Fitur Excel</a>
+        <a href="#shortcut-excel">Shortcut Excel</a>
+        <a href="#shortcut-word">Shortcut Word</a>
+        <a href="#fitur-word">Fitur Word</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="beranda">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <p class="hero-eyebrow">Panduan Lengkap Bahasa Indonesia</p>
+      <h1>Kuasai <span>Excel</span> &amp; <span>Word</span> dari Nol</h1>
+      <p class="hero-sub">
+        Apa itu rumus <code>SUM</code>? Untuk apa <code>Ctrl + A</code>? Temukan jawabannya di sini —
+        puluhan rumus, fungsi, kegunaan fitur, dan shortcut lengkap dengan contoh.
+      </p>
+
+      <div class="search-wrap">
+        <input type="search" id="searchInput" placeholder="Cari rumus/shortcut… mis. SUM, Ctrl+A, VLOOKUP" aria-label="Cari" />
+        <span class="search-hint" id="searchCount"></span>
+      </div>
+
+      <div class="hero-cards">
+        <a href="#rumus-excel" class="hero-card hc-excel">
+          <span class="hc-icon">Σ</span>
+          <strong>Rumus Excel</strong>
+          <p>SUM, AVERAGE, IF, VLOOKUP &amp; lainnya dengan contoh</p>
+        </a>
+        <a href="#shortcut-excel" class="hero-card hc-excel">
+          <span class="hc-icon">⌘</span>
+          <strong>Shortcut Excel</strong>
+          <p>Ctrl+A, Ctrl+1, Alt+= dan puluhan kombinasi tombol</p>
+        </a>
+        <a href="#shortcut-word" class="hero-card hc-word">
+          <span class="hc-icon">W</span>
+          <strong>Shortcut Word</strong>
+          <p>Ctrl+A, Ctrl+B, F7 untuk mempercepat mengetik</p>
+        </a>
+        <a href="#fitur-word" class="hero-card hc-word">
+          <span class="hc-icon">¶</span>
+          <strong>Fitur Word</strong>
+          <p>Daftar isi otomatis, mail merge, lacakan perubahan</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RUMUS EXCEL ===== -->
+  <section class="section" id="rumus-excel">
+    <div class="container">
+      <p class="section-eyebrow excel">Microsoft Excel</p>
+      <h2 class="section-title">Rumus &amp; Fungsi Wajib Excel</h2>
+      <p class="section-lead">
+        Semua rumus diawali tanda <code>=</code>. Contoh memakai pemisah koma <code>,</code>;
+        pada beberapa versi Excel Indonesia gunakan titik koma <code>;</code>.
+      </p>
+      <div class="grid" id="gridRumus">
+
+        <article class="item" data-keywords="sum jumlah menjumlahkan total autosum">
+          <div class="item-head"><h3>SUM</h3><span class="tag">Aritmatika</span></div>
+          <p class="desc">Menjumlahkan semua angka dalam rentang sel. Rumus paling sering dipakai di Excel.</p>
+          <pre class="code"><code>=SUM(A1:A10)</code></pre>
+          <p class="example">Contoh: <code>=SUM(B2:B6)</code> jika B2–B6 berisi 10, 20, 30, 40, 50 → hasil <strong>150</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="average rata-rata rerata mean">
+          <div class="item-head"><h3>AVERAGE</h3><span class="tag">Aritmatika</span></div>
+          <p class="desc">Menghitung rata-rata aritmetika dari rentang angka (jumlah dibagi banyak data).</p>
+          <pre class="code"><code>=AVERAGE(B2:B6)</code></pre>
+          <p class="example">Contoh: data 10, 20, 30, 40, 50 → hasil <strong>30</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="max nilai tertinggi terbesar">
+          <div class="item-head"><h3>MAX &amp; MIN</h3><span class="tag">Arithmatika</span></div>
+          <p class="desc">MAX mengambil nilai tertinggi, MIN mengambil nilai terendah dari rentang data.</p>
+          <pre class="code"><code>=MAX(A1:A10)
+=MIN(A1:A10)</code></pre>
+          <p class="example">Contoh: data 8, 15, 3, 22 → MAX = <strong>22</strong>, MIN = <strong>3</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="count counta menghitung jumlah sel terisi angka">
+          <div class="item-head"><h3>COUNT / COUNTA</h3><span class="tag">Statistik</span></div>
+          <p class="desc">COUNT menghitung sel berisi <em>angka</em>; COUNTA menghitung sel yang <em>tidak kosong</em> (teks maupun angka).</p>
+          <pre class="code"><code>=COUNT(A1:A10)
+=COUNTA(A1:A10)</code></pre>
+          <p class="example">Contoh: rentang berisi 3 angka dan 2 teks → COUNT = <strong>3</strong>, COUNTA = <strong>5</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="if logika kondisi jika lulus benar salah">
+          <div class="item-head"><h3>IF</h3><span class="tag">Logika</span></div>
+          <p class="desc">Memeriksa kondisi: jika benar menghasilkan nilai A, jika salah menghasilkan nilai B.</p>
+          <pre class="code"><code>=IF(A1&gt;=75,"Lulus","Remedial")</code></pre>
+          <p class="example">Contoh: nilai 80 → <strong>Lulus</strong>; nilai 60 → <strong>Remedial</strong>. Bisa bersarang: <code>=IF(A1&gt;90,"A",IF(A1&gt;75,"B","C"))</code></p>
+        </article>
+
+        <article class="item" data-keywords="vlookup xlookup mencari data pencarian lookup tabel">
+          <div class="item-head"><h3>VLOOKUP / XLOOKUP</h3><span class="tag">Pencarian</span></div>
+          <p class="desc">Mencari nilai di kolom pertama tabel lalu mengembalikan nilai dari kolom lain. XLOOKUP (Excel 365) lebih fleksibel.</p>
+          <pre class="code"><code>=VLOOKUP(A2, tabel, 3, FALSE)
+=XLOOKUP(A2, kolom_cari, kolom_hasil)</code></pre>
+          <p class="example">Contoh: cari kode "B02" di tabel harga → otomatis mengambil nama/harga barang tanpa menyalin manual.</p>
+        </article>
+
+        <article class="item" data-keywords="countif sumif conditional jumlah bersyarat">
+          <div class="item-head"><h3>COUNTIF / SUMIF</h3><span class="tag">Bersyarat</span></div>
+          <p class="desc">Menghitung/menjumlahkan data yang memenuhi satu kriteria tertentu.</p>
+          <pre class="code"><code>=COUNTIF(D2:D100,"Laki-laki")
+=SUMIF(C2:C100,"Makanan",B2:B100)</code></pre>
+          <p class="example">Contoh SUMIF: menjumlahkan hanya kolom belanja untuk kategori "Makanan".</p>
+        </article>
+
+        <article class="item" data-keywords="concatenate textjoin gabung teks nama ampersand">
+          <div class="item-head"><h3>CONCATENATE / &amp;</h3><span class="tag">Teks</span></div>
+          <p class="desc">Menggabungkan beberapa teks/sel menjadi satu. Fungsi modern: <code>TEXTJOIN</code> dengan pemisah.</p>
+          <pre class="code"><code>=A1&amp;" "&amp;B1
+=TEXTJOIN(", ",TRUE,A1:A5)</code></pre>
+          <p class="example">Contoh: "Budi" &amp; " " &amp; "Santoso" → <strong>"Budi Santoso"</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="left right mid len potong teks substr">
+          <div class="item-head"><h3>LEFT / RIGHT / MID</h3><span class="tag">Teks</span></div>
+          <p class="desc">Memotong teks dari kiri, kanan, atau tengah. LEN menghitung jumlah karakter.</p>
+          <pre class="code"><code>=LEFT(A1,4)
+=MID(A1,3,5)
+=RIGHT(A1,2)</code></pre>
+          <p class="example">Contoh: "JAKARTA01" → <code>LEFT</code> 4 = <strong>"JAKA"</strong>, <code>RIGHT</code> 2 = <strong>"01"</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="round pembulatan desimal bulat">
+          <div class="item-head"><h3>ROUND</h3><span class="tag">Arithmatika</span></div>
+          <p class="desc">Membulatkan angka sesuai jumlah desimal yang diinginkan.</p>
+          <pre class="code"><code>=ROUND(3.14159, 2)</code></pre>
+          <p class="example">Contoh: hasil → <strong>3,14</strong>. <code>=ROUND(3.14159,0)</code> → <strong>3</strong>.</p>
+        </article>
+
+        <article class="item" data-keywords="iferror error salah div#0 penanganan galat">
+          <div class="item-head"><h3>IFERROR</h3><span class="tag">Logika</span></div>
+          <p class="desc">Menangani galat (mis. #DIV/0!, #N/A) agar tampil pesan pengganti yang rapi.</p>
+          <pre class="code"><code>=IFERROR(A1/B1,"-")</code></pre>
+          <p class="example">Contoh: jika B1 = 0 maka tampil <strong>"-"</strong> alih-alih #DIV/0!.</p>
+        </article>
+
+        <article class="item" data-keywords="today now tanggal waktu hari ini">
+          <div class="item-head"><h3>TODAY / NOW</h3><span class="tag">Tanggal</span></div>
+          <p class="desc">TODAY menghasilkan tanggal hari ini; NOW tanggal + jam. Nilainya berubah otomatis tiap dibuka.</p>
+          <pre class="code"><code>=TODAY()
+=NOW()</code></pre>
+          <p class="example">Contoh: menghitung sisa hari: <code>=TODAY()-tanggal_selesai</code>.</p>
+        </article>
+
+      </div>
+      <p class="empty-note" id="emptyRumus" hidden>Tidak ada rumus yang cocok dengan pencarianmu.</p>
+    </div>
+  </section>
+
+  <!-- ===== FITUR EXCEL ===== -->
+  <section class="section section-alt" id="fitur-excel">
+    <div class="container">
+      <p class="section-eyebrow excel">Microsoft Excel</p>
+      <h2 class="section-title">Kegunaan Fitur-Fitur Excel</h2>
+      <p class="section-lead">Bukan rumus — ini fitur bawaan Excel dan fungsinya.</p>
+      <div class="grid" id="gridFiturExcel">
+
+        <article class="item" data-keywords="autosum alt+= penjumlahan cepat">
+          <div class="item-head"><h3>AutoSum (Alt + =)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Menyisipkan rumus SUM (atau AVERAGE, COUNT) otomatis untuk rentang di atas/kiri kursor — tanpa mengetik.</p>
+        </article>
+
+        <article class="item" data-keywords="format sel ctrl+1 number currency persen">
+          <div class="item-head"><h3>Format Sel (Ctrl + 1)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Membuka jendela Format Sel: atur angka (rupiah, persen, desimal), rata, garis, dan proteksi sel.</p>
+        </article>
+
+        <article class="item" data-keywords="filter penyaringan data saring ctrl+shift+l">
+          <div class="item-head"><h3>Filter Data (Ctrl + Shift + L)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Menampilkan tombol panah di tiap kolom header untuk menyaring data — misal hanya menampilkan kategori "Elektronik".</p>
+        </article>
+
+        <article class="item" data-keywords="sort pengurutan naik turun urutkan">
+          <div class="item-head"><h3>Sort / Pengurutan</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Mengurutkan data A→Z atau Z→A, menurut angka kecil→besar, bisa dengan banyak kriteria sekaligus.</p>
+        </article>
+
+        <article class="item" data-keywords="conditional formatting format bersyarat warna panas dingin data bar">
+          <div class="item-head"><h3>Conditional Formatting</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Memberi warna/garis/data bar otomatis berdasarkan kondisi — misal nilai &lt; 75 jadi merah.</p>
+        </article>
+
+        <article class="item" data-keywords="pivot table tabel pivot ringkasan data rekap">
+          <div class="item-head"><h3>PivotTable</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Merekap ribuan baris data menjadi laporan ringkas (jumlah, rata-rata, hitung) hanya dengan drag &amp; drop.</p>
+        </article>
+
+        <article class="item" data-keywords="grafik chart diagram batang lingkaran pie">
+          <div class="item-head"><h3>Chart / Grafik</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Mengubah angka menjadi grafik batang, lingkaran, garis, dll. Cepat dengan <code>Alt + F1</code> (grafik di sheet) atau <code>F11</code> (sheet baru).</p>
+        </article>
+
+        <article class="item" data-keywords="tabel format table ctrl+t">
+          <div class="item-head"><h3>Tabel (Ctrl + T)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Mengubah rentang menjadi tabel resmi: header otomatis, filter, dan rumus ikut terisi sepanjang tabel.</p>
+        </article>
+
+        <article class="item" data-keywords="data validation daftar dropdown batas input">
+          <div class="item-head"><h3>Data Validation (Dropdown)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Membatasi isi sel — misal hanya boleh memilih dari daftar "Ya/Tidak" sehingga data tidak salah input.</p>
+        </article>
+
+      </div>
+      <p class="empty-note" id="emptyFiturExcel" hidden>Tidak ada fitur yang cocok dengan pencarianmu.</p>
+    </div>
+  </section>
+
+  <!-- ===== SHORTCUT EXCEL ===== -->
+  <section class="section" id="shortcut-excel">
+    <div class="container">
+      <p class="section-eyebrow excel">Microsoft Excel</p>
+      <h2 class="section-title">Shortcut Excel &amp; Kegunaannya</h2>
+      <p class="section-lead">Untuk Windows. Cari lewat kotak pencarian di atas, misal ketik <em>Ctrl+A</em>.</p>
+      <div class="grid" id="gridScExcel">
+
+        <article class="item" data-keywords="ctrl+a pilih sel semua select all area data">
+          <div class="item-head"><h3>Ctrl + A</h3><span class="tag">Pilihan</span></div>
+          <p class="desc"><strong>Memilih seluruh data di sekitar kursor</strong> (current region). Jika ditekan sekali lagi (atau saat kursor di area kosong) → <strong>memilih seluruh sel di sheet</strong> tersebut.</p>
+          <p class="example">Catatan: di Word, Ctrl+A langsung memilih seluruh dokumen.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+c ctrl+x ctrl+v salin tempel potong copy paste">
+          <div class="item-head"><h3>Ctrl + C / X / V</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>C</strong> = salin (copy), <strong>X</strong> = potong (cut), <strong>V</strong> = tempel (paste). Kombinasi paling dasar untuk memindahkan data.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+z undo batalkan ctrl+y redo">
+          <div class="item-head"><h3>Ctrl + Z / Y</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>Ctrl+Z</strong> = membatalkan aksi terakhir (undo), <strong>Ctrl+Y</strong> = mengulangi yang tadi dibatalkan (redo).</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+s simpan save save as f12">
+          <div class="item-head"><h3>Ctrl + S</h3><span class="tag">File</span></div>
+          <p class="desc"><strong>Menyimpan file</strong>. Biasakan tekan ini berkala supaya pekerjaan tidak hilang.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+b ctrl+i ctrl+u tebal miring bawah garis bold italic underline">
+          <div class="item-head"><h3>Ctrl + B / I / U</h3><span class="tag">Format</span></div>
+          <p class="desc"><strong>B</strong> = tebal (bold), <strong>I</strong> = miring (italic), <strong>U</strong> = garis bawah (underline) untuk teks di dalam sel.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+1 format sel number currency">
+          <div class="item-head"><h3>Ctrl + 1</h3><span class="tag">Format</span></div>
+          <p class="desc">Membuka jendela <strong>Format Sel</strong> — cara tercepat mengubah tipe angka, alignment, border, dan fill.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+shift+l filter saring data">
+          <div class="item-head"><h3>Ctrl + Shift + L</h3><span class="tag">Data</span></div>
+          <p class="desc"><strong>Menyalakan/mematikan Filter</strong> pada header tabel — untuk menyaring data tanpa menghapusnya.</p>
+        </article>
+
+        <article class="item" data-keywords="alt+= autosum penjumlahan otomatis sum">
+          <div class="item-head"><h3>Alt + =</h3><span class="tag">Rumus</span></div>
+          <p class="desc"><strong>AutoSum</strong> — sisipkan rumus SUM otomatis untuk data di atas/kiri, lalu tekan Enter.</p>
+        </article>
+
+        <article class="item" data-keywords="f2 edit sel isi rumus isi sel">
+          <div class="item-head"><h3>F2</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>Mengedit isi sel</strong> langsung di selnya (setara klik dua kali) — berguna saat memeriksa rumus panjang.</p>
+        </article>
+
+        <article class="item" data-keywords="f4 absolute referensi mutlak dollar lock gembok rumus">
+          <div class="item-head"><h3>F4</h3><span class="tag">Rumus</span></div>
+          <p class="desc">Saat mengetik rumus, <strong>mengunci referensi sel</strong> (A1 → $A$1) supaya tidak bergeser saat rumus disalin. Juga = ulangi aksi terakhir.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+home ctrl+end awal akhir sheet sel terakhir">
+          <div class="item-head"><h3>Ctrl + Home / End</h3><span class="tag">Navigasi</span></div>
+          <p class="desc"><strong>Ctrl+Home</strong> = loncat ke sel A1, <strong>Ctrl+End</strong> = loncat ke sel terakhir yang berisi data.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+pageup pagedown pindah sheet lembar kerja tab">
+          <div class="item-head"><h3>Ctrl + Page Up / Down</h3><span class="tag">Navigasi</span></div>
+          <p class="desc"><strong>Berpindah antar sheet</strong> (lembar kerja) tanpa harus mengklik tab di bawah.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+f cari ctrl+h ganti find replace">
+          <div class="item-head"><h3>Ctrl + F / H</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>Ctrl+F</strong> = mencari teks, <strong>Ctrl+H</strong> = mencari sekaligus menggantinya (find &amp; replace).</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+shift+g word count jumlah kata excel">
+          <div class="item-head"><h3>Ctrl + Shift + G</h3><span class="tag">Info</span></div>
+          <p class="desc">Di Excel: menampilkan <strong>jumlah kata/karakter</strong> pada pilihan. (Di Word: Word Count.)</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+; tanggal hari ini jam waktu">
+          <div class="item-head"><h3>Ctrl + ;</h3><span class="tag">Input</span></div>
+          <p class="desc">Menyisipkan <strong>tanggal hari ini</strong> sebagai nilai tetap. <code>Ctrl+Shift+;</code> menyisipkan jam.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+space shift+space pilih kolom baris seluruh column row">
+          <div class="item-head"><h3>Ctrl + Space / Shift + Space</h3><span class="tag">Pilihan</span></div>
+          <p class="desc"><strong>Ctrl+Space</strong> = memilih seluruh kolom, <strong>Shift+Space</strong> = memilih seluruh baris.</p>
+        </article>
+
+      </div>
+      <p class="empty-note" id="emptyScExcel" hidden>Tidak ada shortcut yang cocok dengan pencarianmu.</p>
+    </div>
+  </section>
+
+  <!-- ===== SHORTCUT WORD ===== -->
+  <section class="section section-alt" id="shortcut-word">
+    <div class="container">
+      <p class="section-eyebrow word">Microsoft Word</p>
+      <h2 class="section-title">Shortcut Word &amp; Kegunaannya</h2>
+      <p class="section-lead">Untuk Windows — mempercepat mengetik dan mengformat dokumen.</p>
+      <div class="grid" id="gridScWord">
+
+        <article class="item" data-keywords="ctrl+a pilih semua select all dokumen seluruh">
+          <div class="item-head"><h3>Ctrl + A</h3><span class="tag">Pilihan</span></div>
+          <p class="desc"><strong>Memilih seluruh isi dokumen</strong> — dari paragraf pertama sampai terakhir — siap untuk dihapus, diformat, atau disalin.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+b ctrl+i ctrl+u tebal miring bawah garis bold italic underline">
+          <div class="item-head"><h3>Ctrl + B / I / U</h3><span class="tag">Format</span></div>
+          <p class="desc"><strong>B</strong> = tebal, <strong>I</strong> = miring, <strong>U</strong> = garis bawah pada teks yang dipilih.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+c ctrl+x ctrl+v salin tempel potong copy paste">
+          <div class="item-head"><h3>Ctrl + C / X / V</h3><span class="tag">Edit</span></div>
+          <p class="desc">Salin (<strong>C</strong>), potong (<strong>X</strong>), tempel (<strong>V</strong>) teks, gambar, atau objek apa pun di dokumen.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+z ctrl+y undo redo batalkan">
+          <div class="item-head"><h3>Ctrl + Z / Y</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>Ctrl+Z</strong> = batalkan aksi terakhir; <strong>Ctrl+Y</strong> = ulangi (redo). Bisa ditekan berulang untuk mundur beberapa langkah.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+s simpan save f12 save as">
+          <div class="item-head"><h3>Ctrl + S</h3><span class="tag">File</span></div>
+          <p class="desc"><strong>Menyimpan dokumen</strong>. <strong>F12</strong> = Save As (simpan sebagai nama/format baru).</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+l ctrl+e ctrl+r ctrl+j rata kiri tengah kanan penuh align justify">
+          <div class="item-head"><h3>Ctrl + L / E / R / J</h3><span class="tag">Format</span></div>
+          <p class="desc">Perataan paragraf: <strong>L</strong> = rata kiri, <strong>E</strong> = rata tengah (center), <strong>R</strong> = rata kanan, <strong>J</strong> = rata penuh (justify).</p>
+          <p class="example">Catatan: rata tengah pakai E (bukan C), karena C sudah dipakai untuk Copy.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+1 ctrl+2 ctrl+5 spasi baris line spacing double">
+          <div class="item-head"><h3>Ctrl + 1 / 2 / 5</h3><span class="tag">Format</span></div>
+          <p class="desc">Spasi baris paragraf: <strong>1</strong> = single, <strong>2</strong> = double (2 spasi), <strong>5</strong> = 1,5 spasi.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+f cari ctrl+h ganti find replace">
+          <div class="item-head"><h3>Ctrl + F / H</h3><span class="tag">Edit</span></div>
+          <p class="desc"><strong>Ctrl+F</strong> = cari teks di dokumen, <strong>Ctrl+H</strong> = cari &amp; ganti (misal ganti semua "yg" → "yang").</p>
+        </article>
+
+        <article class="item" data-keywords="f7 spell check ejaan tanda baca grammar">
+          <div class="item-head"><h3>F7</h3><span class="tag">Review</span></div>
+          <p class="desc">Menjalankan <strong>pengecekan ejaan &amp; tata bahasa</strong> (spell &amp; grammar check) pada dokumen.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+k hyperlink tautan sisipkan link">
+          <div class="item-head"><h3>Ctrl + K</h3><span class="tag">Sisipkan</span></div>
+          <p class="desc">Menyisipkan <strong>hyperlink</strong> (tautan ke web, file, atau posisi dokumen).</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+enter page break pecah halaman">
+          <div class="item-head"><h3>Ctrl + Enter</h3><span class="tag">Format</span></div>
+          <p class="desc">Memaksa <strong>pindah halaman dari posisi kursor</strong> — berguna memulai bab baru tanpa menekan Enter berkali-kali.</p>
+        </article>
+
+        <article class="item" data-keywords="shift+enter line break pecah baris soft return">
+          <div class="item-head"><h3>Shift + Enter</h3><span class="tag">Format</span></div>
+          <p class="desc">Pindah baris <strong>dalam paragraf yang sama</strong> (soft return) tanpa membuat paragraf baru.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+space hapus format clear formatting reset">
+          <div class="item-head"><h3>Ctrl + Space</h3><span class="tag">Format</span></div>
+          <p class="desc"><strong>Menghapus semua format</strong> pada teks yang dipilih (warna, ukuran, font) kembali ke gaya normal — isinya tetap ada.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+shift+c format painter salin format">
+          <div class="item-head"><h3>Ctrl + Shift + C / V</h3><span class="tag">Format</span></div>
+          <p class="desc">Salin format dari teks lain (<strong>C</strong>) lalu tempelkan ke teks tujuan (<strong>V</strong>) — format painter versi keyboard.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+shift+g jumlah kata word count">
+          <div class="item-head"><h3>Ctrl + Shift + G</h3><span class="tag">Info</span></div>
+          <p class="desc">Menampilkan <strong>jumlah kata</strong> dokumen (Word Count) — penting saat ada target penulisan.</p>
+        </article>
+
+        <article class="item" data-keywords="ctrl+w tutup dokumen close">
+          <div class="item-head"><h3>Ctrl + W</h3><span class="tag">File</span></div>
+          <p class="desc"><strong>Menutup dokumen aktif</strong> (jika belum disimpan, muncul pertanyaan penyimpanan dulu).</p>
+        </article>
+
+      </div>
+      <p class="empty-note" id="emptyScWord" hidden>Tidak ada shortcut yang cocok dengan pencarianmu.</p>
+    </div>
+  </section>
+
+  <!-- ===== FITUR WORD ===== -->
+  <section class="section" id="fitur-word">
+    <div class="container">
+      <p class="section-eyebrow word">Microsoft Word</p>
+      <h2 class="section-title">Kegunaan Fitur-Fitur Word</h2>
+      <p class="section-lead">Fitur bawaan Word dan fungsinya untuk menyusun dokumen rapi.</p>
+      <div class="grid" id="gridFiturWord">
+
+        <article class="item" data-keywords="styles gaya judul heading daftar isi otomatis">
+          <div class="item-head"><h3>Styles (Judul 1, 2, 3…)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Menerapkan gaya resmi ke judul/paragraf. Wajib dipakai agar <strong>Daftar Isi</strong> dan navigasi dokumen bisa dibuat otomatis.</p>
+        </article>
+
+        <article class="item" data-keywords="daftar isi toc table of contents otomatis">
+          <div class="item-head"><h3>Daftar Isi Otomatis</h3><span class="tag">Fitur</span></div>
+          <p class="desc">References → Table of Contents: seluruh judul bab + nomor halaman terisi otomatis dan bisa diperbarui dengan satu klik.</p>
+        </article>
+
+        <article class="item" data-keywords="mail merge gabung surat amplop label massa">
+          <div class="item-head"><h3>Mail Merge (Gabung Surat)</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Menggabungkan satu template dengan daftar data (Excel) untuk membuat ratusan surat/label — misal undangan dengan nama berbeda-beda.</p>
+        </article>
+
+        <article class="item" data-keywords="track changes lacakan perubahan review komentar accept reject">
+          <div class="item-head"><h3>Lacak Perubahan &amp; Komentar</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Review → Track Changes: setiap suntingan ditandai, bisa diterima/ditolak satu per satu — standar untuk dokumen kolaborasi &amp; skripsi.</p>
+        </article>
+
+        <article class="item" data-keywords="header footer nomor halaman kop">
+          <div class="item-head"><h3>Header, Footer &amp; Nomor Halaman</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Area tetap di atas/bawah tiap halaman untuk kop, judul dokumen, atau nomor halaman otomatis.</p>
+        </article>
+
+        <article class="item" data-keywords="tabel table sisipkan baris kolom">
+          <div class="item-head"><h3>Tabel</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Menyusun data rapi dalam baris &amp; kolom; bisa diatur lebarnya, digabung selnya, dan diwarnai.</p>
+        </article>
+
+        <article class="item" data-keywords="kolom columns koran dua tiga kolom">
+          <div class="item-head"><h3>Kolom Teks</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Layout → Columns: memecah halaman menjadi 2/3 kolom seperti koran/majalah.</p>
+        </article>
+
+        <article class="item" data-keywords="pecah halaman section break kompas bab berbeda">
+          <div class="item-head"><h3>Section Break</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Memisahkan bagian dokumen agar kompas/bab I bisa portrait, lampiran landscape, dengan nomor halaman yang berbeda-beda.</p>
+        </article>
+
+        <article class="item" data-keywords="image crop format picture sisipkan gambar">
+          <div class="item-head"><h3>Sisipkan &amp; Format Gambar</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Insert → Pictures: sisipkan gambar, lalu rapikan dengan crop, text wrapping (bungkus teks), dan border.</p>
+        </article>
+
+        <article class="item" data-keywords="find replace cari ganti massal">
+          <div class="item-head"><h3>Cari &amp; Ganti Massal</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Mengganti seluruh kemunculan kata dalam sekali jalan — misal mengubah ejaan lama ke ejaan baru di 50 halaman.</p>
+        </article>
+
+        <article class="item" data-keywords="protect document proteksi password dokumen terkunci">
+          <div class="item-head"><h3>Protect Document</h3><span class="tag">Fitur</span></div>
+          <p class="desc">Membatasi editing (hanya komentar saja, atau dibuka dengan password) supaya dokumen tidak diubah sembarangan.</p>
+        </article>
+
+        <article class="item" data-keywords="export pdf save as pdf">
+          <div class="item-head"><h3>Simpan sebagai PDF</h3><span class="tag">Fitur</span></div>
+          <p class="desc">File → Save As → PDF: dokumen jadi PDF yang tampil sama di semua perangkat dan sulit diubah isinya.</p>
+        </article>
+
+      </div>
+      <p class="empty-note" id="emptyFiturWord" hidden>Tidak ada fitur yang cocok dengan pencarianmu.</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Panduan Excel &amp; Word</strong>
+        <p>Rumus · Fungsi · Kegunaan · Shortcut</p>
+      </div>
+      <p class="footer-note">
+        Shortcut ditulis untuk Microsoft Office versi Windows. Menu bisa sedikit berbeda
+        pada Excel/Word untuk Mac, web, atau versi yang lebih lama.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
