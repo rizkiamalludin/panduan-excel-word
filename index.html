@@ -24,6 +24,21 @@
     .practice-btn{border:0;border-radius:9px;padding:10px 14px;background:#1769e0;color:white;font-weight:700;cursor:pointer}
     .practice-btn.secondary{background:#e8eef7;color:#172b4d}.practice-result{margin-top:14px;padding:12px;border-radius:9px;background:#eef6ff;white-space:pre-wrap;overflow-wrap:anywhere;color:#17365d}
     .practice-help{font-size:.9rem;color:var(--muted,#64748b)}
+    .quiz-section{padding:72px 0;background:var(--card,#fff)}
+    .quiz-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:22px 0}
+    .quiz-progress{font-weight:700;color:var(--muted,#64748b)}
+    .quiz-list{display:grid;gap:16px}
+    .quiz-question{border:1px solid var(--border,#e3e8ef);border-radius:14px;padding:18px;background:var(--bg,#f7f9fc)}
+    .quiz-question h3{font-size:1rem;line-height:1.55;margin:0 0 12px}
+    .quiz-option{display:flex!important;align-items:flex-start;gap:10px;font-weight:500!important;margin:10px 0!important;cursor:pointer}
+    .quiz-option input{width:auto!important;margin-top:4px}
+    .quiz-result{display:none;margin-top:20px;padding:18px;border-radius:12px;background:#eef6ff;color:#17365d;line-height:1.7}
+    .contact-section{padding:64px 0;background:var(--bg,#f7f9fc)}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px;margin-top:24px}
+    .contact-link{display:block;text-decoration:none;border:1px solid var(--border,#e3e8ef);border-radius:16px;padding:22px;background:var(--card,#fff);color:inherit;transition:transform .2s,box-shadow .2s}
+    .contact-link:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(20,40,80,.1)}
+    .contact-link strong{display:block;font-size:1.1rem;margin-bottom:8px}
+    .contact-link span{overflow-wrap:anywhere;color:var(--muted,#64748b)}
     #wordPreview{min-height:100px;padding:14px;border:1px dashed #94a3b8;border-radius:9px;margin-top:14px;background:white;color:#172033;overflow-wrap:anywhere}
     @media(max-width:600px){.practice-card{padding:18px}.practice-section{padding:48px 0}}
   </style>
@@ -48,6 +63,8 @@
         <a href="#shortcut-word">Shortcut Word</a>
         <a href="#fitur-word">Fitur Word</a>
         <a href="#uji-coba">Uji Coba</a>
+        <a href="#tes-pemahaman">Tes Pemahaman</a>
+        <a href="#kontak">Kontak</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
     </div>
@@ -614,8 +631,122 @@
       $('resetWord').addEventListener('click', () => { wordState.bold=false; wordState.italic=false; wordState.underline=false; wordState.align='left'; document.querySelectorAll('[data-word-format]').forEach(b=>b.setAttribute('aria-pressed','false')); updatePreview(); });
       $('checkQuiz').addEventListener('click', () => { const answer=$('quizAnswer').value; $('quizResult').textContent = !answer ? 'Pilih salah satu jawaban terlebih dahulu.' : answer==='SUM' ? 'Benar! =SUM(A1:A3) menjumlahkan 5 + 10 + 15 sehingga hasilnya 30.' : 'Belum tepat. Coba ingat rumus yang digunakan untuk menjumlahkan beberapa angka.'; });
       updatePreview();
+
+      // Bank 25 soal; seluruh soal ditampilkan dalam urutan acak setiap kali dimuat.
+      const questions = [
+        {q:'Rumus apa yang digunakan untuk menjumlahkan angka di A1 sampai A5?',a:['=COUNT(A1:A5)','=SUM(A1:A5)','=MAX(A1:A5)','=MIN(A1:A5)'],c:1,e:'SUM menjumlahkan angka dalam rentang sel.'},
+        {q:'Apa kegunaan fungsi AVERAGE?',a:['Mencari angka terbesar','Menghitung banyak sel berisi angka','Menghitung rata-rata','Menjumlahkan teks'],c:2,e:'AVERAGE menghitung rata-rata aritmetika.'},
+        {q:'Jika ingin mencari angka terbesar pada B1:B10, gunakan…',a:['=MAX(B1:B10)','=MIN(B1:B10)','=SUM(B1:B10)','=COUNT(B1:B10)'],c:0,e:'MAX mengembalikan nilai terbesar.'},
+        {q:'Fungsi MIN digunakan untuk…',a:['Mencari nilai terkecil','Mencari nilai terbesar','Membuat grafik','Menghitung rata-rata'],c:0,e:'MIN mencari nilai paling kecil.'},
+        {q:'Apa hasil =SUM(A1:A3) jika isinya 5, 10, dan 15?',a:['15','20','30','50'],c:2,e:'5 + 10 + 15 = 30.'},
+        {q:'Fungsi COUNT pada Excel berguna untuk…',a:['Menghitung sel yang berisi angka','Mengubah huruf menjadi tebal','Mencari teks di Word','Membuat daftar isi'],c:0,e:'COUNT menghitung banyaknya nilai numerik.'},
+        {q:'Semua rumus Excel biasanya diawali dengan tanda…',a:['#','= ','@','&'],c:1,e:'Rumus Excel diawali tanda sama dengan (=).'},
+        {q:'Apa fungsi IF pada Excel?',a:['Menguji kondisi dan memberi hasil sesuai kondisi','Menghapus seluruh sheet','Membuat dokumen Word','Mengunci keyboard'],c:0,e:'IF memilih hasil berdasarkan kondisi benar atau salah.'},
+        {q:'VLOOKUP umumnya digunakan untuk…',a:['Mencari data secara vertikal pada tabel','Mengatur margin dokumen','Menghitung jumlah kata','Membuat garis bawah'],c:0,e:'VLOOKUP mencari nilai di kolom pertama tabel.'},
+        {q:'Shortcut Ctrl+C berarti…',a:['Tempel','Potong','Salin','Simpan'],c:2,e:'Ctrl+C menyalin pilihan.'},
+        {q:'Shortcut Ctrl+V digunakan untuk…',a:['Menempelkan hasil salinan','Membatalkan tindakan','Mencetak dokumen','Membuka bantuan'],c:0,e:'Ctrl+V adalah perintah paste/tempel.'},
+        {q:'Shortcut Ctrl+Z berfungsi untuk…',a:['Menyimpan','Membatalkan tindakan terakhir','Membuat teks tebal','Mencari data'],c:1,e:'Ctrl+Z adalah undo.'},
+        {q:'Shortcut Ctrl+S sebaiknya digunakan untuk…',a:['Menyimpan pekerjaan','Menghapus file','Mengganti nama sheet','Membuat tabel baru'],c:0,e:'Ctrl+S menyimpan file.'},
+        {q:'Di Excel, Ctrl+T biasanya digunakan untuk…',a:['Membuat tabel dari rentang data','Menebalkan teks saja','Menutup program','Membuka tab baru browser'],c:0,e:'Ctrl+T membuat tabel Excel.'},
+        {q:'Apa fungsi Data Validation?',a:['Membatasi atau mengatur input data yang boleh dimasukkan','Menghitung rata-rata otomatis','Membuat daftar isi Word','Mencetak halaman'],c:0,e:'Data Validation membantu menjaga input tetap sesuai aturan.'},
+        {q:'Grafik atau Chart membantu kita untuk…',a:['Mengubah angka menjadi visualisasi','Memperbaiki ejaan otomatis','Mengunci semua file','Mengirim email'],c:0,e:'Grafik menyajikan data secara visual.'},
+        {q:'Di Microsoft Word, Ctrl+B digunakan untuk…',a:['Teks miring','Teks tebal','Teks bergaris bawah','Menyimpan dokumen'],c:1,e:'Ctrl+B mengaktifkan format tebal (bold).'},
+        {q:'Shortcut Ctrl+I di Word digunakan untuk…',a:['Teks miring','Teks tebal','Mencetak','Mencari kata'],c:0,e:'Ctrl+I mengaktifkan italic/miring.'},
+        {q:'Shortcut Ctrl+U di Word digunakan untuk…',a:['Garis bawah pada teks','Membuka dokumen','Membuat grafik','Menghitung sel'],c:0,e:'Ctrl+U mengaktifkan underline/garis bawah.'},
+        {q:'Fitur Styles di Word sangat membantu untuk…',a:['Memberi format judul secara konsisten','Menjumlahkan angka','Mencari nilai minimum','Mengubah angka jadi tanggal'],c:0,e:'Styles memformat judul dan paragraf secara konsisten.'},
+        {q:'Daftar Isi Otomatis di Word bergantung pada penggunaan…',a:['Styles/Heading pada judul','Warna font saja','Spasi ganda saja','Nama file'],c:0,e:'Heading styles memungkinkan Word membangun daftar isi.'},
+        {q:'Mail Merge berguna untuk…',a:['Membuat banyak surat dengan data penerima berbeda','Mencari angka terbesar','Mengatur formula Excel','Mengubah tampilan browser'],c:0,e:'Mail Merge menggabungkan template dengan sumber data.'},
+        {q:'Shortcut Ctrl+F biasanya digunakan untuk…',a:['Mencari teks atau data','Menyimpan file','Menebalkan teks','Menutup aplikasi'],c:0,e:'Ctrl+F membuka fitur pencarian.'},
+        {q:'Apa manfaat menyimpan dokumen Word sebagai PDF?',a:['Memudahkan berbagi dengan tampilan yang relatif konsisten','Mengubah semua teks menjadi rumus','Menghapus semua gambar','Membuat dokumen otomatis menjadi spreadsheet'],c:0,e:'PDF membantu menjaga tampilan dokumen saat dibagikan.'},
+        {q:'Fitur Track Changes di Word digunakan untuk…',a:['Melacak perubahan saat dokumen diedit','Menjumlahkan sel','Membuat grafik lingkaran','Mengubah nama email'],c:0,e:'Track Changes mencatat perubahan untuk ditinjau.'}
+      ];
+      const quizList = $('quizList'), quizForm = $('understandingQuiz'), testResult = $('testResult');
+      function shuffle(array) {
+        const copy = array.slice();
+        for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
+        return copy;
+      }
+      function renderQuiz() {
+        const randomized = shuffle(questions);
+        quizList.replaceChildren();
+        randomized.forEach((item, index) => {
+          const card = document.createElement('article'); card.className = 'quiz-question';
+          const heading = document.createElement('h3'); heading.textContent = `${index + 1}. ${item.q}`; card.appendChild(heading);
+          const options = shuffle(item.a.map((label, originalIndex) => ({label, originalIndex})));
+          options.forEach(option => {
+            const label = document.createElement('label'); label.className = 'quiz-option';
+            const radio = document.createElement('input'); radio.type = 'radio'; radio.name = `question-${index}`; radio.value = String(option.originalIndex); radio.required = true;
+            const span = document.createElement('span'); span.textContent = option.label;
+            label.append(radio, span); card.appendChild(label);
+          });
+          card.dataset.correct = String(item.c); card.dataset.explanation = item.e; quizList.appendChild(card);
+        });
+        $('quizProgress').textContent = '25 soal • Urutan diacak';
+        testResult.style.display = 'none'; testResult.textContent = '';
+      }
+      quizForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const cards = [...quizList.querySelectorAll('.quiz-question')];
+        const unanswered = cards.findIndex((card, i) => !quizForm.querySelector(`input[name="question-${i}"]:checked`));
+        if (unanswered !== -1) { $('quizProgress').textContent = `Masih ada soal yang belum dijawab (soal ${unanswered + 1}).`; cards[unanswered].scrollIntoView({behavior:'smooth',block:'center'}); return; }
+        let score = 0; const review = [];
+        cards.forEach((card, i) => {
+          const selected = Number(quizForm.querySelector(`input[name="question-${i}"]:checked`).value);
+          const correct = Number(card.dataset.correct); if (selected === correct) score++;
+          const answerText = card.querySelectorAll('.quiz-option span')[0];
+          review.push(`${i + 1}. ${selected === correct ? 'Benar' : 'Belum tepat'} — ${card.dataset.explanation}`);
+        });
+        const percent = Math.round(score / cards.length * 100);
+        testResult.style.display = 'block';
+        testResult.textContent = `Nilai kamu: ${score}/25 (${percent}%).
+${percent >= 88 ? 'Mantap! Pemahamanmu sudah sangat baik.' : percent >= 68 ? 'Bagus! Pelajari lagi materi yang masih keliru.' : 'Jangan menyerah. Baca materi lagi lalu coba ulangi tes.'}
+
+Pembahasan:
+${review.join('\n')}`;
+        $('quizProgress').textContent = 'Tes selesai'; testResult.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+      $('resetTest').addEventListener('click', renderQuiz);
+      renderQuiz();
     })();
   </script>
+
+  <!-- ===== TES PEMAHAMAN ===== -->
+  <section class="quiz-section" id="tes-pemahaman">
+    <div class="container">
+      <p class="section-eyebrow excel">Uji kemampuanmu</p>
+      <h2 class="section-title">Tes Pemahaman Excel &amp; Word</h2>
+      <p class="section-lead">Ada 25 soal pilihan ganda tentang rumus, fitur, dan shortcut Excel serta Word. Urutan soal diacak setiap kali halaman dibuka. Pilih satu jawaban untuk setiap soal, lalu tekan tombol periksa.</p>
+      <div class="quiz-top"><span class="quiz-progress" id="quizProgress">Memuat 25 soal…</span><button class="practice-btn secondary" type="button" id="resetTest">Acak ulang soal</button></div>
+      <form id="understandingQuiz">
+        <div class="quiz-list" id="quizList"></div>
+        <div class="practice-actions"><button class="practice-btn" type="submit">Periksa semua jawaban</button></div>
+      </form>
+      <div class="quiz-result" id="testResult" role="status" aria-live="polite"></div>
+      <p class="practice-help">Tips: coba kerjakan sendiri dulu sebelum melihat materi. Tombol “Acak ulang soal” akan mengatur ulang urutan 25 soal dan menghapus jawaban sebelumnya.</p>
+    </div>
+  </section>
+
+  <!-- ===== KONTAK ===== -->
+  <section class="contact-section" id="kontak">
+    <div class="container">
+      <p class="section-eyebrow word">Saran &amp; masukan</p>
+      <h2 class="section-title">Punya Pendapat atau Saran?</h2>
+      <p class="section-lead">Kalau ada materi yang kurang jelas, menemukan kesalahan, atau punya ide untuk mengembangkan website ini, hubungi lewat salah satu tombol di bawah.</p>
+      <div class="contact-grid">
+        <a class="contact-link" href="mailto:rizkiamalludin99@gmail.com?subject=Saran%20untuk%20Website%20Panduan%20Excel%20dan%20Word&body=Halo%2C%20saya%20ingin%20memberikan%20saran%20untuk%20website%20Panduan%20Excel%20dan%20Word.%0A%0ASaran%20saya%3A%0A" target="_blank" rel="noopener noreferrer">
+          <strong>✉️ Kirim pendapat lewat Gmail</strong>
+          <span>rizkiamalludin99@gmail.com</span>
+          <p>Tekan untuk membuka aplikasi email dan menulis saran.</p>
+        </a>
+        <a class="contact-link" href="https://www.instagram.com/rizki_amalludin.exe/" target="_blank" rel="noopener noreferrer">
+          <strong>📸 Hubungi lewat Instagram</strong>
+          <span>@rizki_amalludin.exe</span>
+          <p>Tekan untuk membuka profil Instagram dan mengirim pesan jika tersedia.</p>
+        </a>
+      </div>
+      <p class="practice-help">Catatan: tombol Gmail membuka aplikasi email yang terhubung di perangkatmu. Tombol Instagram membuka profil; pengguna mungkin perlu masuk ke akun Instagram terlebih dahulu.</p>
+    </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
