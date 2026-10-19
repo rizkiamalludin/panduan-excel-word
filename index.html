@@ -592,6 +592,22 @@
     </div>
   </section>
 
+  <!-- ===== TES PEMAHAMAN ===== -->
+  <section class="quiz-section" id="tes-pemahaman">
+    <div class="container">
+      <p class="section-eyebrow excel">Uji kemampuanmu</p>
+      <h2 class="section-title">Tes Pemahaman Excel &amp; Word</h2>
+      <p class="section-lead">Ada 25 soal pilihan ganda tentang rumus, fitur, dan shortcut Excel serta Word. Urutan soal diacak setiap kali halaman dibuka. Pilih satu jawaban untuk setiap soal, lalu tekan tombol periksa.</p>
+      <div class="quiz-top"><span class="quiz-progress" id="quizProgress">Memuat 25 soal…</span><button class="practice-btn secondary" type="button" id="resetTest">Acak ulang soal</button></div>
+      <form id="understandingQuiz">
+        <div class="quiz-list" id="quizList"></div>
+        <div class="practice-actions"><button class="practice-btn" type="submit">Periksa semua jawaban</button></div>
+      </form>
+      <div class="quiz-result" id="testResult" role="status" aria-live="polite"></div>
+      <p class="practice-help">Tips: coba kerjakan sendiri dulu sebelum melihat materi. Tombol “Acak ulang soal” akan mengatur ulang urutan 25 soal dan menghapus jawaban sebelumnya.</p>
+    </div>
+  </section>
+
   <script>
     (() => {
       const $ = (id) => document.getElementById(id);
@@ -709,22 +725,6 @@ ${review.join('\n')}`;
       renderQuiz();
     })();
   </script>
-
-  <!-- ===== TES PEMAHAMAN ===== -->
-  <section class="quiz-section" id="tes-pemahaman">
-    <div class="container">
-      <p class="section-eyebrow excel">Uji kemampuanmu</p>
-      <h2 class="section-title">Tes Pemahaman Excel &amp; Word</h2>
-      <p class="section-lead">Ada 25 soal pilihan ganda tentang rumus, fitur, dan shortcut Excel serta Word. Urutan soal diacak setiap kali halaman dibuka. Pilih satu jawaban untuk setiap soal, lalu tekan tombol periksa.</p>
-      <div class="quiz-top"><span class="quiz-progress" id="quizProgress">Memuat 25 soal…</span><button class="practice-btn secondary" type="button" id="resetTest">Acak ulang soal</button></div>
-      <form id="understandingQuiz">
-        <div class="quiz-list" id="quizList"></div>
-        <div class="practice-actions"><button class="practice-btn" type="submit">Periksa semua jawaban</button></div>
-      </form>
-      <div class="quiz-result" id="testResult" role="status" aria-live="polite"></div>
-      <p class="practice-help">Tips: coba kerjakan sendiri dulu sebelum melihat materi. Tombol “Acak ulang soal” akan mengatur ulang urutan 25 soal dan menghapus jawaban sebelumnya.</p>
-    </div>
-  </section>
 
   <!-- ===== KONTAK ===== -->
   <section class="contact-section" id="kontak">
