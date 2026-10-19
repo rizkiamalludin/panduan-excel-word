@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <title>Panduan Excel &amp; Word — Rumus, Fungsi, dan Shortcut</title>
   <meta name="description" content="Panduan lengkap Microsoft Excel dan Word dalam bahasa Indonesia: rumus seperti SUM, fungsi, kegunaan fitur, dan shortcut seperti Ctrl+A." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* Area praktik interaktif */
+    .practice-section{padding:72px 0;background:var(--bg,#f7f9fc)}
+    .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin-top:28px}
+    .practice-card{background:var(--card,#fff);border:1px solid var(--border,#e3e8ef);border-radius:18px;padding:24px;box-shadow:0 8px 28px rgba(20,40,80,.06)}
+    .practice-card h3{margin:0 0 8px;font-size:1.25rem}.practice-card p{line-height:1.6}
+    .practice-card label{display:block;font-weight:700;margin:14px 0 6px}
+    .practice-card input,.practice-card select,.practice-card textarea{box-sizing:border-box;width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;background:var(--input-bg,#fff);color:inherit}
+    .practice-card textarea{min-height:105px;resize:vertical}
+    .practice-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .practice-btn{border:0;border-radius:9px;padding:10px 14px;background:#1769e0;color:white;font-weight:700;cursor:pointer}
+    .practice-btn.secondary{background:#e8eef7;color:#172b4d}.practice-result{margin-top:14px;padding:12px;border-radius:9px;background:#eef6ff;white-space:pre-wrap;overflow-wrap:anywhere;color:#17365d}
+    .practice-help{font-size:.9rem;color:var(--muted,#64748b)}
+    #wordPreview{min-height:100px;padding:14px;border:1px dashed #94a3b8;border-radius:9px;margin-top:14px;background:white;color:#172033;overflow-wrap:anywhere}
+    @media(max-width:600px){.practice-card{padding:18px}.practice-section{padding:48px 0}}
+  </style>
+
 </head>
 <body>
 
@@ -29,6 +47,7 @@
         <a href="#shortcut-excel">Shortcut Excel</a>
         <a href="#shortcut-word">Shortcut Word</a>
         <a href="#fitur-word">Fitur Word</a>
+        <a href="#uji-coba">Uji Coba</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
     </div>
@@ -501,6 +520,102 @@
       <p class="empty-note" id="emptyFiturWord" hidden>Tidak ada fitur yang cocok dengan pencarianmu.</p>
     </div>
   </section>
+
+
+  <!-- ===== AREA UJI COBA ===== -->
+  <section class="practice-section" id="uji-coba">
+    <div class="container">
+      <p class="section-eyebrow excel">Belajar sambil praktik</p>
+      <h2 class="section-title">Tempat Uji Coba Excel &amp; Word</h2>
+      <p class="section-lead">Coba rumus dan format teks langsung di sini. Ini adalah simulasi sederhana di browser, bukan aplikasi Microsoft Office asli.</p>
+      <div class="practice-grid">
+        <article class="practice-card">
+          <h3>📊 Simulasi Rumus Excel</h3>
+          <p>Masukkan beberapa angka yang dipisahkan koma, lalu pilih rumus yang ingin dicoba.</p>
+          <label for="excelNumbers">Angka (contoh: 10, 20, 30, 40)</label>
+          <input id="excelNumbers" type="text" value="10, 20, 30, 40" inputmode="decimal" />
+          <label for="excelFormula">Pilih rumus</label>
+          <select id="excelFormula">
+            <option value="SUM">SUM — menjumlahkan</option>
+            <option value="AVERAGE">AVERAGE — rata-rata</option>
+            <option value="MAX">MAX — angka terbesar</option>
+            <option value="MIN">MIN — angka terkecil</option>
+            <option value="COUNT">COUNT — menghitung banyak angka</option>
+          </select>
+          <div class="practice-actions"><button class="practice-btn" id="runExcel" type="button">Hitung hasil</button><button class="practice-btn secondary" id="resetExcel" type="button">Reset contoh</button></div>
+          <div class="practice-result" id="excelResult" role="status" aria-live="polite">Hasil akan muncul di sini.</div>
+          <p class="practice-help">Catatan: gunakan titik untuk angka desimal, misalnya 2.5.</p>
+        </article>
+        <article class="practice-card">
+          <h3>📝 Simulasi Microsoft Word</h3>
+          <p>Ketik teks lalu coba tombol format. Hasilnya akan terlihat pada pratinjau di bawah.</p>
+          <label for="wordText">Teks latihan</label>
+          <textarea id="wordText" placeholder="Ketik teks yang ingin kamu coba...">Belajar Word itu mudah!</textarea>
+          <div class="practice-actions">
+            <button class="practice-btn" type="button" data-word-format="bold"><b>Tebal</b></button>
+            <button class="practice-btn" type="button" data-word-format="italic"><i>Miring</i></button>
+            <button class="practice-btn" type="button" data-word-format="underline"><u>Garis bawah</u></button>
+            <button class="practice-btn secondary" type="button" data-word-align="left">Kiri</button>
+            <button class="practice-btn secondary" type="button" data-word-align="center">Tengah</button>
+            <button class="practice-btn secondary" type="button" data-word-align="right">Kanan</button>
+            <button class="practice-btn secondary" id="resetWord" type="button">Reset format</button>
+          </div>
+          <div id="wordPreview" aria-label="Pratinjau teks Word">Belajar Word itu mudah!</div>
+          <p class="practice-help">Format ini hanya untuk latihan di halaman ini; tidak mengubah dokumen Word di komputer.</p>
+        </article>
+        <article class="practice-card">
+          <h3>✅ Latihan Cepat</h3>
+          <p><strong>Soal:</strong> Jika sel A1 sampai A3 berisi 5, 10, dan 15, rumus apa yang menghasilkan 30?</p>
+          <label for="quizAnswer">Pilih jawaban</label>
+          <select id="quizAnswer"><option value="">-- Pilih jawaban --</option><option value="AVERAGE">=AVERAGE(A1:A3)</option><option value="SUM">=SUM(A1:A3)</option><option value="MAX">=MAX(A1:A3)</option><option value="COUNT">=COUNT(A1:A3)</option></select>
+          <div class="practice-actions"><button class="practice-btn" id="checkQuiz" type="button">Periksa jawaban</button></div>
+          <div class="practice-result" id="quizResult" role="status" aria-live="polite">Jawab dulu, lalu tekan “Periksa jawaban”.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const parseNumbers = () => {
+        const raw = $('excelNumbers').value.trim();
+        if (!raw) return null;
+        const values = raw.split(/[,;\s]+/).filter(Boolean).map(v => Number(v));
+        return values.length && values.every(Number.isFinite) ? values : null;
+      };
+      $('runExcel').addEventListener('click', () => {
+        const nums = parseNumbers();
+        const out = $('excelResult');
+        if (!nums) { out.textContent = 'Masukkan angka yang valid, pisahkan dengan koma. Contoh: 10, 20, 30'; return; }
+        const formula = $('excelFormula').value;
+        let result;
+        if (formula === 'SUM') result = nums.reduce((a,b)=>a+b,0);
+        if (formula === 'AVERAGE') result = nums.reduce((a,b)=>a+b,0)/nums.length;
+        if (formula === 'MAX') result = Math.max(...nums);
+        if (formula === 'MIN') result = Math.min(...nums);
+        if (formula === 'COUNT') result = nums.length;
+        out.textContent = `Rumus: =${formula}(data)\nData: ${nums.join(', ')}\nHasil: ${Number.isInteger(result) ? result : Number(result.toFixed(6))}`;
+      });
+      $('resetExcel').addEventListener('click', () => { $('excelNumbers').value='10, 20, 30, 40'; $('excelFormula').value='SUM'; $('excelResult').textContent='Contoh direset. Tekan “Hitung hasil” untuk melihat hasil.'; });
+
+      const wordText = $('wordText'), preview = $('wordPreview');
+      const wordState = {bold:false, italic:false, underline:false, align:'left'};
+      function updatePreview() {
+        preview.textContent = wordText.value || 'Pratinjau teks akan muncul di sini.';
+        preview.style.fontWeight = wordState.bold ? '700' : '400';
+        preview.style.fontStyle = wordState.italic ? 'italic' : 'normal';
+        preview.style.textDecoration = wordState.underline ? 'underline' : 'none';
+        preview.style.textAlign = wordState.align;
+      }
+      wordText.addEventListener('input', updatePreview);
+      document.querySelectorAll('[data-word-format]').forEach(btn => btn.addEventListener('click', () => { const key=btn.dataset.wordFormat; wordState[key]=!wordState[key]; btn.setAttribute('aria-pressed', String(wordState[key])); updatePreview(); }));
+      document.querySelectorAll('[data-word-align]').forEach(btn => btn.addEventListener('click', () => { wordState.align=btn.dataset.wordAlign; updatePreview(); }));
+      $('resetWord').addEventListener('click', () => { wordState.bold=false; wordState.italic=false; wordState.underline=false; wordState.align='left'; document.querySelectorAll('[data-word-format]').forEach(b=>b.setAttribute('aria-pressed','false')); updatePreview(); });
+      $('checkQuiz').addEventListener('click', () => { const answer=$('quizAnswer').value; $('quizResult').textContent = !answer ? 'Pilih salah satu jawaban terlebih dahulu.' : answer==='SUM' ? 'Benar! =SUM(A1:A3) menjumlahkan 5 + 10 + 15 sehingga hasilnya 30.' : 'Belum tepat. Coba ingat rumus yang digunakan untuk menjumlahkan beberapa angka.'; });
+      updatePreview();
+    })();
+  </script>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
