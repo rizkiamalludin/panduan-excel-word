@@ -16,6 +16,15 @@
     .feature-summary article{padding:16px 18px;border:1px solid var(--border,#e3e8ef);border-radius:14px;background:var(--card,#fff)}
     .feature-summary h3{font-size:1rem;margin:0 0 6px}
     .feature-summary p{font-size:.92rem;line-height:1.6;margin:0;color:var(--muted,#64748b)}
+    .tutorial-section{padding:64px 0;background:var(--bg,#f7f9fc)}
+    .tutorial-group{margin:28px 0}
+    .tutorial-group h3{font-size:1.3rem;margin:0 0 14px}
+    .tutorial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px}
+    .tutorial-card{padding:18px;border:1px solid var(--border,#e3e8ef);border-radius:15px;background:var(--card,#fff)}
+    .tutorial-card h4{margin:0 0 8px;font-size:1rem}
+    .tutorial-card p{margin:0 0 12px;font-size:.92rem;line-height:1.6;color:var(--muted,#64748b)}
+    .tutorial-card ol{padding-left:20px;margin:0 0 14px;font-size:.9rem;line-height:1.65}
+    .tutorial-link{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}
     /* Area praktik interaktif */
     .practice-section{padding:72px 0;background:var(--bg,#f7f9fc)}
     .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin-top:28px}
@@ -89,6 +98,7 @@ html.site-dark body a{color:#93c5fd}
         <a href="#shortcut-excel">Shortcut Excel</a>
         <a href="#shortcut-word">Shortcut Word</a>
         <a href="#fitur-word">Fitur Word</a>
+        <a href="#tutorial-langkah">Tutorial Praktis</a>
         <a href="#uji-coba">Uji Coba</a>
         <a href="#tes-pemahaman">Tes Pemahaman</a>
         <a href="#kontak">Kontak</a>
@@ -577,6 +587,117 @@ html.site-dark body a{color:#93c5fd}
     </div>
   </section>
 
+
+  <!-- ===== TUTORIAL LANGKAH DEMI LANGKAH ===== -->
+  <section class="tutorial-section" id="tutorial-langkah">
+    <div class="container">
+      <p class="section-eyebrow">Panduan praktik</p>
+      <h2 class="section-title">Cara Menggunakan Fitur Excel &amp; Word</h2>
+      <p class="section-lead">Ikuti langkah singkat di bawah. Nama menu bisa sedikit berbeda tergantung versi Microsoft Office yang digunakan.</p>
+
+      <div class="tutorial-group">
+        <h3>📊 Tutorial Microsoft Excel</h3>
+        <div class="tutorial-grid">
+          <article class="tutorial-card">
+            <h4>1. Freeze Panes — Mengunci baris atau kolom</h4>
+            <p>Menjaga judul tabel tetap terlihat saat kamu menggulir data yang panjang.</p>
+            <ol>
+              <li>Klik sel tepat di bawah baris dan di kanan kolom yang ingin tetap terlihat.</li>
+              <li>Buka tab <b>View</b> (Tampilan).</li>
+              <li>Pilih <b>Freeze Panes</b> lalu pilih <b>Freeze Panes</b> lagi.</li>
+              <li>Untuk membatalkan, pilih <b>Unfreeze Panes</b>.</li>
+            </ol>
+            <p><b>Contoh:</b> Untuk mengunci baris 1, pilih sel A2 lalu View → Freeze Panes → Freeze Top Row.</p>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=tutorial+freeze+panes+excel+bahasa+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>2. Sort &amp; Filter — Mengurutkan dan menyaring</h4>
+            <p>Mengurutkan nama atau angka, serta menampilkan data sesuai kriteria tertentu.</p>
+            <ol><li>Blok tabel beserta judul kolom.</li><li>Buka tab <b>Data</b>.</li><li>Pilih <b>Sort</b> untuk mengurutkan atau <b>Filter</b> untuk menampilkan pilihan tertentu.</li><li>Gunakan panah pada judul kolom untuk memilih filter.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+menggunakan+sort+filter+excel+bahasa+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>3. Conditional Formatting — Warna otomatis</h4>
+            <p>Memberi warna pada sel berdasarkan aturan, misalnya nilai di bawah 75.</p>
+            <ol><li>Pilih rentang angka.</li><li>Buka <b>Home → Conditional Formatting</b>.</li><li>Pilih aturan seperti <b>Highlight Cells Rules</b>.</li><li>Tentukan batas nilai dan gaya warna.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=conditional+formatting+excel+bahasa+indonesia+tutorial" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>4. Data Validation — Membuat pilihan dropdown</h4>
+            <p>Membatasi input atau menyediakan pilihan seperti Hadir, Izin, dan Sakit.</p>
+            <ol><li>Pilih sel yang akan diberi pilihan.</li><li>Buka <b>Data → Data Validation</b>.</li><li>Pada Allow, pilih <b>List</b>.</li><li>Isi Source dengan pilihan yang dipisahkan koma, lalu tekan OK.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+dropdown+list+excel+data+validation+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>5. PivotTable — Ringkasan data</h4>
+            <p>Merangkum ribuan baris menjadi laporan berdasarkan kategori, tanggal, atau nama.</p>
+            <ol><li>Klik salah satu sel di dalam tabel data.</li><li>Pilih <b>Insert → PivotTable</b>.</li><li>Pilih lokasi PivotTable lalu tekan OK.</li><li>Seret nama kolom ke area Rows, Columns, Values, atau Filters.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+pivottable+excel+pemula+bahasa+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>6. Chart — Membuat grafik</h4>
+            <p>Mengubah data menjadi grafik batang, garis, atau lingkaran agar mudah dibandingkan.</p>
+            <ol><li>Blok data beserta judulnya.</li><li>Pilih tab <b>Insert</b>.</li><li>Pilih jenis grafik yang sesuai.</li><li>Atur judul dan label grafik agar mudah dipahami.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+grafik+excel+untuk+pemula+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>7. Format as Table — Mengubah data jadi tabel</h4>
+            <p>Membuat tabel dengan gaya siap pakai, filter, dan perluasan data yang lebih praktis.</p>
+            <ol><li>Pilih rentang data.</li><li>Tekan <b>Ctrl + T</b> atau pilih <b>Home → Format as Table</b>.</li><li>Pastikan My table has headers dicentang jika ada judul kolom.</li><li>Pilih desain tabel.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+format+as+table+excel+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="tutorial-group">
+        <h3>📝 Tutorial Microsoft Word</h3>
+        <div class="tutorial-grid">
+          <article class="tutorial-card">
+            <h4>1. Memasukkan gambar ke dokumen</h4>
+            <p>Menambahkan foto, logo, ilustrasi, atau gambar pendukung ke halaman Word.</p>
+            <ol><li>Letakkan kursor di bagian dokumen yang diinginkan.</li><li>Pilih <b>Insert → Pictures</b>.</li><li>Pilih This Device, cari gambar di komputer, lalu klik Insert.</li><li>Klik gambar untuk mengubah ukuran dari sudutnya.</li><li>Pilih <b>Layout Options</b> untuk mengatur posisi dan aliran teks, misalnya Square atau In Front of Text.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+memasukkan+gambar+di+word+mengatur+posisi+gambar+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>2. Membuat tabel</h4>
+            <p>Menyusun informasi dalam baris dan kolom, misalnya jadwal, daftar nilai, atau inventaris.</p>
+            <ol><li>Pilih <b>Insert → Table</b>.</li><li>Tentukan jumlah kolom dan baris.</li><li>Isi tabel, lalu gunakan tab Table Design dan Layout untuk mengatur tampilannya.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+tabel+di+microsoft+word+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>3. Nomor halaman</h4>
+            <p>Memberi nomor otomatis pada halaman laporan, makalah, atau buku.</p>
+            <ol><li>Pilih <b>Insert → Page Number</b>.</li><li>Pilih posisi nomor, misalnya Bottom of Page.</li><li>Pilih desain nomor yang diinginkan.</li><li>Klik Close Header and Footer.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+nomor+halaman+berbeda+word+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>4. Daftar isi otomatis</h4>
+            <p>Membuat daftar isi yang bisa diperbarui berdasarkan judul dan subjudul dokumen.</p>
+            <ol><li>Terapkan gaya <b>Heading 1</b> pada judul utama dan <b>Heading 2</b> pada subjudul.</li><li>Letakkan kursor di halaman daftar isi.</li><li>Pilih <b>References → Table of Contents</b>.</li><li>Jika isi berubah, klik daftar isi lalu pilih Update Table.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+daftar+isi+otomatis+word+heading+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>5. Mengatur margin dan ukuran kertas</h4>
+            <p>Mengatur batas tepi dokumen serta ukuran kertas seperti A4 atau Letter.</p>
+            <ol><li>Buka tab <b>Layout</b>.</li><li>Pilih <b>Margins</b> untuk mengatur batas tepi.</li><li>Pilih <b>Size</b> lalu pilih ukuran kertas, misalnya A4.</li><li>Gunakan Orientation untuk memilih Portrait atau Landscape.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+mengatur+margin+ukuran+kertas+A4+word+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>6. Header, Footer, dan nomor dokumen</h4>
+            <p>Menambahkan nama dokumen, identitas, tanggal, atau informasi berulang di tiap halaman.</p>
+            <ol><li>Pilih <b>Insert → Header</b> atau <b>Footer</b>.</li><li>Pilih desain lalu ketik informasi.</li><li>Gunakan Page Number bila perlu menambahkan nomor halaman.</li><li>Klik Close Header and Footer.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+membuat+header+footer+word+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+          <article class="tutorial-card">
+            <h4>7. Track Changes dan komentar</h4>
+            <p>Mencatat revisi dan memberi masukan tanpa langsung menghilangkan teks asli.</p>
+            <ol><li>Buka tab <b>Review</b>.</li><li>Aktifkan <b>Track Changes</b>.</li><li>Lakukan pengeditan; perubahan akan ditandai.</li><li>Gunakan New Comment untuk memberi catatan, lalu Accept atau Reject untuk meninjau revisi.</li></ol>
+            <a class="tutorial-link" href="https://www.youtube.com/results?search_query=cara+menggunakan+track+changes+dan+comment+word+indonesia" target="_blank" rel="noopener noreferrer">▶ Tutorial video YouTube</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== AREA UJI COBA ===== -->
   <section class="practice-section" id="uji-coba">
