@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
+    .feature-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px;margin:22px 0 28px}
+    .feature-summary article{padding:16px 18px;border:1px solid var(--border,#e3e8ef);border-radius:14px;background:var(--card,#fff)}
+    .feature-summary h3{font-size:1rem;margin:0 0 6px}
+    .feature-summary p{font-size:.92rem;line-height:1.6;margin:0;color:var(--muted,#64748b)}
     /* Area praktik interaktif */
     .practice-section{padding:72px 0;background:var(--bg,#f7f9fc)}
     .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin-top:28px}
@@ -248,6 +252,12 @@ html.site-dark body a{color:#93c5fd}
       <p class="section-eyebrow excel">Microsoft Excel</p>
       <h2 class="section-title">Kegunaan Fitur-Fitur Excel</h2>
       <p class="section-lead">Bukan rumus — ini fitur bawaan Excel dan fungsinya.</p>
+      <div class="feature-summary" aria-label="Ringkasan kegunaan fitur Excel">
+        <article><h3>📊 Mengelola data</h3><p>Menyusun, mengurutkan, dan menyaring data agar informasi mudah ditemukan.</p></article>
+        <article><h3>🧮 Mengolah angka</h3><p>Menghitung, merekap, dan menganalisis data lebih cepat dengan rumus serta PivotTable.</p></article>
+        <article><h3>📈 Menyajikan laporan</h3><p>Mengubah angka menjadi tabel dan grafik supaya hasil mudah dibaca dan dibandingkan.</p></article>
+        <article><h3>✅ Menjaga ketepatan</h3><p>Mengatur format dan membatasi input agar data lebih rapi serta mengurangi kesalahan.</p></article>
+      </div>
       <div class="grid" id="gridFiturExcel">
 
         <article class="item" data-keywords="autosum alt+= penjumlahan cepat">
@@ -494,6 +504,12 @@ html.site-dark body a{color:#93c5fd}
       <p class="section-eyebrow word">Microsoft Word</p>
       <h2 class="section-title">Kegunaan Fitur-Fitur Word</h2>
       <p class="section-lead">Fitur bawaan Word dan fungsinya untuk menyusun dokumen rapi.</p>
+      <div class="feature-summary" aria-label="Ringkasan kegunaan fitur Word">
+        <article><h3>📝 Membuat dokumen</h3><p>Menulis surat, laporan, makalah, proposal, undangan, dan dokumen lainnya.</p></article>
+        <article><h3>🎨 Merapikan tampilan</h3><p>Mengatur judul, paragraf, gambar, tabel, kolom, margin, dan nomor halaman.</p></article>
+        <article><h3>🤝 Meninjau bersama</h3><p>Memberi komentar dan melacak perubahan agar revisi dokumen lebih mudah diperiksa.</p></article>
+        <article><h3>📄 Membagikan hasil</h3><p>Membuat daftar isi otomatis dan menyimpan dokumen ke PDF agar mudah dibagikan.</p></article>
+      </div>
       <div class="grid" id="gridFiturWord">
 
         <article class="item" data-keywords="styles gaya judul heading daftar isi otomatis">
