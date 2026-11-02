@@ -114,21 +114,124 @@ cpp:'#include <iostream>\nusing namespace std;\nint main() {\n    string nama = 
 };
 function setExample(){ $('code').value=examples[$('language').value]; $('output').textContent='Hasil program akan muncul di sini.'; $('runStatus').textContent='Contoh kode siap dijalankan.';}
 $('language').addEventListener('change',setExample);$('resetCode').addEventListener('click',setExample);$('clearOutput').addEventListener('click',()=>{$('output').textContent='';$('runStatus').textContent='Output dibersihkan.'});
+
+let pyWorkerInstance = null;
+let pyWorkerObjectUrl = null;
+const pyWorkerSource = [
+  "let pyodideRuntime = null;",
+  "self.onmessage = async function(event) {",
+  "  try {",
+  "    if (!pyodideRuntime) {",
+  "      importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');",
+  "      pyodideRuntime = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/' });",
+  "    }",
+  "    self.postMessage({ ready: true });",
+  "    const denyNetwork = function() { throw new Error('Akses jaringan dinonaktifkan pada playground.'); };",
+  "    self.fetch = denyNetwork; self.importScripts = denyNetwork;",
+  "    self.XMLHttpRequest = undefined; self.WebSocket = undefined; self.EventSource = undefined;",
+  "    self.Worker = undefined; self.SharedWorker = undefined; self.indexedDB = undefined; self.caches = undefined;",
+  "    const logs = [];",
+  "    pyodideRuntime.setStdout({ batched: function(value) { logs.push(value); } });",
+  "    pyodideRuntime.setStderr({ batched: function(value) { logs.push('Error: ' + value); } });",
+  "    try {",
+  "      await pyodideRuntime.runPythonAsync(event.data.code);",
+  "      self.postMessage({ ok: true, output: logs.join('\\\\n') || '(Program selesai tanpa output.)' });",
+  "    } finally {",
+  "      pyodideRuntime.setStdout({ batched: function() {} });",
+  "      pyodideRuntime.setStderr({ batched: function() {} });",
+  "    }",
+  "  } catch (error) {",
+  "    self.postMessage({ ok: false, error: error && error.message ? error.message : String(error) });",
+  "  }",
+  "};"
+].join('\n');
+function resetPyWorker(worker) {
+  if (worker) worker.terminate();
+  if (pyWorkerInstance === worker) {
+    pyWorkerInstance = null;
+    if (pyWorkerObjectUrl) URL.revokeObjectURL(pyWorkerObjectUrl);
+    pyWorkerObjectUrl = null;
+  }
+}
+async function executePython(code) {
+  if (!pyWorkerInstance) {
+    pyWorkerObjectUrl = URL.createObjectURL(new Blob([pyWorkerSource], { type: 'text/javascript' }));
+    pyWorkerInstance = new Worker(pyWorkerObjectUrl);
+  }
+  const worker = pyWorkerInstance;
+  return await new Promise((resolve, reject) => {
+    let executionTimer = null;
+    const startupTimer = setTimeout(() => {
+      resetPyWorker(worker);
+      reject(new Error('Mesin Python terlalu lama dimuat. Periksa koneksi lalu coba lagi.'));
+    }, 60000);
+    const cleanup = () => {
+      clearTimeout(startupTimer);
+      if (executionTimer) clearTimeout(executionTimer);
+      worker.onmessage = null;
+      worker.onerror = null;
+    };
+    worker.onmessage = (event) => {
+      const result = event.data || {};
+      if (result.ready) {
+        clearTimeout(startupTimer);
+        executionTimer = setTimeout(() => {
+          cleanup();
+          resetPyWorker(worker);
+          reject(new Error('Waktu eksekusi habis (batas 5 detik).'));
+        }, 5000);
+        return;
+      }
+      cleanup();
+      if (result.ok) resolve(result.output);
+      else reject(new Error(result.error || 'Program Python gagal dijalankan.'));
+    };
+    worker.onerror = (event) => {
+      cleanup();
+      resetPyWorker(worker);
+      reject(new Error(event.message || 'Worker Python gagal dijalankan.'));
+    };
+    worker.postMessage({ code });
+  });
+}
+
 $('runCode').addEventListener('click',async()=>{
  const lang=$('language').value, code=$('code').value, btn=$('runCode');
  $('output').textContent='Menjalankan kode...';$('runStatus').textContent='Sedang berjalan…';btn.disabled=true;
  try{
   if(lang==='javascript'){
-   const logs=[];const format=v=>typeof v==='string'?v:JSON.stringify(v);
-   const fakeConsole={log:(...a)=>logs.push(a.map(format).join(' ')),warn:(...a)=>logs.push('⚠ '+a.map(format).join(' ')),error:(...a)=>logs.push('Error: '+a.map(format).join(' ')),clear:()=>logs.splice(0)};
-   const run=new Function('console','"use strict";\n'+code+'\n//# sourceURL=codemuda-user.js');
-   run(fakeConsole);$('output').textContent=logs.join('\n')||'(Program selesai tanpa output.)';$('runStatus').textContent='JavaScript selesai dijalankan.';
+   const workerSource = [
+    "const denyNetwork = function() { throw new Error('Akses jaringan dinonaktifkan pada playground.'); };",
+    "self.fetch = denyNetwork; self.importScripts = denyNetwork;",
+    "self.XMLHttpRequest = undefined; self.WebSocket = undefined; self.EventSource = undefined;",
+    "self.Worker = undefined; self.SharedWorker = undefined; self.indexedDB = undefined; self.caches = undefined;",
+    "self.onmessage = function(event) {",
+    " const logs = [];",
+    " const format = function(value) { if (typeof value === 'string') return value; try { return JSON.stringify(value); } catch (_) { return String(value); } };",
+    " const safeConsole = { log: function() { logs.push(Array.from(arguments).map(format).join(' ')); }, warn: function() { logs.push('⚠ ' + Array.from(arguments).map(format).join(' ')); }, error: function() { logs.push('Error: ' + Array.from(arguments).map(format).join(' ')); }, clear: function() { logs.splice(0); } };",
+    " try { const execute = new Function('console', '\"use strict\";\\\\n' + event.data.code); execute(safeConsole); self.postMessage({ ok: true, output: logs.join('\\\\n') || '(Program selesai tanpa output.)' }); }",
+    " catch (error) { self.postMessage({ ok: false, error: error && error.message ? error.message : String(error) }); }",
+    "};"
+   ].join('\n');
+   const workerUrl=URL.createObjectURL(new Blob([workerSource],{type:'text/javascript'}));
+   const worker=new Worker(workerUrl);
+   try {
+    const result=await new Promise((resolve,reject)=>{
+     const timeout=setTimeout(()=>{worker.terminate();reject(new Error('Waktu eksekusi habis (batas 2 detik).'));},2000);
+     worker.onmessage=event=>{clearTimeout(timeout);resolve(event.data);};
+     worker.onerror=event=>{clearTimeout(timeout);reject(new Error(event.message||'Worker gagal menjalankan kode.'));};
+     worker.postMessage({code});
+    });
+    if(!result.ok)throw new Error(result.error||'Program JavaScript gagal dijalankan.');
+    $('output').textContent=result.output;
+    $('runStatus').textContent='JavaScript selesai dijalankan di lingkungan terpisah.';
+   } finally { worker.terminate(); URL.revokeObjectURL(workerUrl); }
   }else if(lang==='python'){
-   if(!window.pyodideInstance){$('runStatus').textContent='Memuat mesin Python (pertama kali bisa sedikit lama)…';const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js';document.head.appendChild(s);await new Promise((res,rej)=>{s.onload=res;s.onerror=()=>rej(Error('Mesin Python gagal dimuat. Periksa koneksi internet.'));});window.pyodideInstance=await loadPyodide();}
-   const py=window.pyodideInstance;let logs=[];py.setStdout({batched:(x)=>logs.push(x)});py.setStderr({batched:(x)=>logs.push('Error: '+x)});
-   try{await py.runPythonAsync(code);$('output').textContent=logs.join('\n')||'(Program selesai tanpa output.)';$('runStatus').textContent='Python selesai dijalankan.';}finally{py.setStdout({batched:()=>{}});py.setStderr({batched:()=>{}});}
-  }else{
-   $('runStatus').textContent='Mengirim kode C++ ke layanan kompilasi…';
+   $('runStatus').textContent='Menyiapkan mesin Python terisolasi…';
+   const pythonOutput=await executePython(code);
+   $('output').textContent=pythonOutput;
+   $('runStatus').textContent='Python selesai dijalankan di lingkungan terpisah.';
+  }else{   $('runStatus').textContent='Mengirim kode C++ ke layanan kompilasi…';
    const response=await fetch('https://emkc.org/api/v2/piston/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({language:'c++',version:'*',files:[{name:'main.cpp',content:code}]})});
    if(!response.ok)throw Error('Layanan C++ tidak merespons (HTTP '+response.status+').');const data=await response.json();const r=data.run||{};let out=(r.stdout||'')+(r.stderr?'\n'+r.stderr:'');if(data.compile&&data.compile.stderr)out+='\n'+data.compile.stderr;$('output').textContent=out.trim()||'(Program selesai tanpa output.)';$('runStatus').textContent=(r.code===0?'C++ selesai dijalankan.':'Program berakhir dengan kode '+r.code+'.');
   }
