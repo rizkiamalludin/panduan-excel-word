@@ -135,7 +135,7 @@ const pyWorkerSource = [
   "    pyodideRuntime.setStderr({ batched: function(value) { logs.push('Error: ' + value); } });",
   "    try {",
   "      await pyodideRuntime.runPythonAsync(event.data.code);",
-  "      self.postMessage({ ok: true, output: logs.join('\\\\n') || '(Program selesai tanpa output.)' });",
+  "      self.postMessage({ ok: true, output: logs.join('\\n') || '(Program selesai tanpa output.)' });",
   "    } finally {",
   "      pyodideRuntime.setStdout({ batched: function() {} });",
   "      pyodideRuntime.setStderr({ batched: function() {} });",
@@ -209,7 +209,7 @@ $('runCode').addEventListener('click',async()=>{
     " const logs = [];",
     " const format = function(value) { if (typeof value === 'string') return value; try { return JSON.stringify(value); } catch (_) { return String(value); } };",
     " const safeConsole = { log: function() { logs.push(Array.from(arguments).map(format).join(' ')); }, warn: function() { logs.push('⚠ ' + Array.from(arguments).map(format).join(' ')); }, error: function() { logs.push('Error: ' + Array.from(arguments).map(format).join(' ')); }, clear: function() { logs.splice(0); } };",
-    " try { const execute = new Function('console', '\"use strict\";\\\\n' + event.data.code); execute(safeConsole); self.postMessage({ ok: true, output: logs.join('\\\\n') || '(Program selesai tanpa output.)' }); }",
+    " try { const execute = new Function('console', '\"use strict\";\\n' + event.data.code); execute(safeConsole); self.postMessage({ ok: true, output: logs.join('\\n') || '(Program selesai tanpa output.)' }); }",
     " catch (error) { self.postMessage({ ok: false, error: error && error.message ? error.message : String(error) }); }",
     "};"
    ].join('\n');
